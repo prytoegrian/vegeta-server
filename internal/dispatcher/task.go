@@ -274,6 +274,7 @@ func attackDetailFromTask(t ITaskGetter) models.AttackDetails {
 			Params:    t.Params(),
 			CreatedAt: t.CreatedAt().Format(time.RFC1123),
 			UpdatedAt: t.UpdatedAt().Format(time.RFC1123),
+			Created2:  models.JSONTime(t.CreatedAt()),
 		},
 	}
 

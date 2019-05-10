@@ -1,5 +1,9 @@
 package models
 
+import (
+	"time"
+)
+
 // AttackInfo encapsulates the attack information for attacks
 // submitted to the dispatcher
 type AttackInfo struct {
@@ -11,6 +15,7 @@ type AttackInfo struct {
 	Params    AttackParams `json:"params,omitempty"`
 	CreatedAt string       `json:"created_at"`
 	UpdatedAt string       `json:"updated_at"`
+	Created2  JSONTime     `json:"created2"`
 }
 
 // AttackDetails captures the AttackInfo for COMPLETED attacks,
@@ -18,6 +23,17 @@ type AttackInfo struct {
 type AttackDetails struct {
 	AttackInfo
 	Result []byte `json:"result,omitempty"`
+}
+
+type JSONTime time.Time
+
+// MarshalJSON implements the json.Marshaler interface.
+func (t JSONTime) MarshalJSON() ([]byte, error) {
+	b := make([]byte, 0)
+	b = append(b, '"')
+	b = time.Time(t).AppendFormat(b, time.RFC1123)
+	b = append(b, '"')
+	return b, nil
 }
 
 // FilterParams defines a map structure for the filter parameters received via
