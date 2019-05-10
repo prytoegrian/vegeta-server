@@ -13,9 +13,8 @@ type AttackInfo struct {
 	Status AttackStatus `json:"status,omitempty"`
 	// Params captures the attack parameters
 	Params    AttackParams `json:"params,omitempty"`
-	CreatedAt string       `json:"created_at"`
-	UpdatedAt string       `json:"updated_at"`
-	Created2  JSONTime     `json:"created2"`
+	CreatedAt JSONTime     `json:"created_at"`
+	UpdatedAt JSONTime     `json:"updated_at"`
 }
 
 // AttackDetails captures the AttackInfo for COMPLETED attacks,
@@ -25,6 +24,7 @@ type AttackDetails struct {
 	Result []byte `json:"result,omitempty"`
 }
 
+// JSONTime is a time type for marshalling to json with RFC1123
 type JSONTime time.Time
 
 // MarshalJSON implements the json.Marshaler interface.
